@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frame X | Upgrade Your Space</title>
+  <meta name="description" content="Upgrade your space with posters, frames, and stickers made for your vibe. Shop now in Egypt!">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="logo">FRAME X</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#custom">Custom</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="cart-btn" id="open-cart" aria-label="Open Cart">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main id="app-content">
+    <!-- Default initial view will be injected via JS, but we can pre-render the homepage for SEO and speed -->
+    <div id="view-home" class="view active">
+      
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <h1 class="hero-headline">UPGRADE<br><span class="text-accent">YOUR VIBE</span></h1>
+          <p class="hero-subheadline">Posters, frames, and stickers that speak your language. أطلب دلوقتي, delivered direct inside Egypt.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="app.navigate('shop')">Shop Now</button>
+            <button class="btn btn-secondary" onclick="app.navigate('custom')">Customize Yours</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Sellers Section -->
+      <section class="section" id="bestsellers">
+        <div class="section-header">
+          <h2>TRENDING NOW <span class="badge badge-hot">Selling Fast</span></h2>
+          <p>The most wanted decor. Limited stock.</p>
+        </div>
+        <div class="product-grid" id="featured-products">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+      
+      <!-- Custom Promo Section -->
+      <section class="section custom-promo bg-dark">
+        <div class="custom-promo-card glass-panel">
+          <div class="promo-content">
+            <h2>Design Your Own</h2>
+            <p>Upload your image, choose your frame, see it live. Custom made for you in minutes.</p>
+            <button class="btn btn-primary btn-glow" onclick="app.navigate('custom')">Start Customizing</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Proof -->
+      <section class="section">
+        <div class="section-header">
+          <h2>TRUSTED BY YOUTH</h2>
+          <p>Join +10,000 customers all over Egypt upgrading their space.</p>
+        </div>
+        <div class="reviews-marquee">
+          <!-- Marquee injected by JS -->
+          <div class="review-card">"Vibe changed 180 degrees. Material is premium 👌" - ⭐⭐⭐⭐⭐</div>
+          <div class="review-card">"Fast delivery and the frame is solid! عاش" - ⭐⭐⭐⭐⭐</div>
+          <div class="review-card">"Custom poster came out exactly how I wanted it." - ⭐⭐⭐⭐⭐</div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Shop View -->
+    <div id="view-shop" class="view">
+      <section class="section margin-top-nav">
+        <h2>Shop Everything</h2>
+        <div class="category-filters">
+          <button class="btn-filter active" data-cat="all">All</button>
+          <button class="btn-filter" data-cat="posters">Posters</button>
+          <button class="btn-filter" data-cat="frames">Frames</button>
+          <button class="btn-filter" data-cat="stickers">Stickers</button>
+        </div>
+        <div class="product-grid" id="shop-products"></div>
+      </section>
+    </div>
+
+    <!-- Custom Builder View -->
+    <div id="view-custom" class="view">
+      <section class="section margin-top-nav custom-builder-section">
+        <div class="builder-layout">
+          <div class="builder-preview" id="builder-preview">
+            <div class="preview-wall">
+              <div class="preview-frame" id="preview-frame-el">
+                <div class="preview-inner">
+                  <span class="preview-placeholder">Upload an Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="builder-controls glass-panel">
+            <h2>Custom <span class="text-accent">Frame</span></h2>
+            <div class="control-group">
+              <label>1. Upload your art</label>
+              <input type="file" id="custom-image-upload" accept="image/*" class="file-input">
+            </div>
+            <div class="control-group">
+              <label>2. Choose Size</label>
+              <select id="custom-size" class="input-field">
+                <option value="A4">A4 (21 x 29.7 cm)</option>
+                <option value="A3">A3 (29.7 x 42 cm)</option>
+                <option value="A2">A2 (42 x 59.4 cm)</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label>3. Frame Color</label>
+              <div class="color-options" id="custom-frame-color">
+                <button class="color-btn active" data-color="#000000" style="background: black;"></button>
+                <button class="color-btn" data-color="#ffffff" style="background: white; border: 1px solid #ccc;"></button>
+                <button class="color-btn" data-color="#d4af37" style="background: #d4af37;"></button>
+              </div>
+            </div>
+            <div class="builder-price-cta">
+              <div class="price-display">
+                <span class="label">Total (EGP):</span>
+                <span class="value" id="custom-price">350</span>
+              </div>
+              <button class="btn btn-primary btn-glow" id="custom-add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Checkout View -->
+    <div id="view-checkout" class="view">
+      <section class="section margin-top-nav checkout-section">
+        <h2>Secure Checkout <span class="badge badge-trust">SSL Secure</span></h2>
+        <div class="checkout-layout">
+          <form class="checkout-form glass-panel" id="checkout-form">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" required placeholder="Ahmed Ali" class="input-field">
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" required placeholder="01X XXX XXXX" class="input-field">
+            </div>
+            <div class="form-group">
+              <label>Address (Egypt only)</label>
+              <textarea required placeholder="Detailed address" class="input-field"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select required class="input-field" id="payment-method">
+                <option value="cod">Cash on Delivery (COD)</option>
+                <option value="vodafone">Vodafone Cash</option>
+                <option value="instapay">Instapay</option>
+              </select>
+            </div>
+            <div id="vf-instructions" class="payment-instructions hidden">
+              <p>Please send the total amount to <strong>010xxxxxxxx</strong>. Orders process upon receipt.</p>
+            </div>
+            <button type="submit" class="btn btn-primary w-full btn-glow">Complete Order</button>
+          </form>
+          <div class="checkout-summary glass-panel">
+            <h3>Order Summary</h3>
+            <div id="checkout-items-list" class="checkout-items"></div>
+            <div class="summary-totals">
+              <div class="row"><span>Subtotal:</span><span id="chk-subtotal">EGP 0</span></div>
+              <div class="row"><span>Shipping:</span><span>EGP 45</span></div>
+              <div class="row total"><span>Total:</span><span id="chk-total">EGP 45</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Modals & Overlays -->
+  <!-- Mobile Sticky Cart CTA -->
+  <div class="mobile-sticky-cart hidden" id="mobile-sticky-cart">
+    <div class="sticky-cart-info">
+      <span id="sticky-cart-count">0 items</span>
+      <span id="sticky-cart-total" class="font-bold">EGP 0</span>
+    </div>
+    <button class="btn btn-primary" onclick="app.toggleCart(true)">View Cart</button>
+  </div>
+
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Frame <span id="cart-count">(0)</span></h3>
+      <button class="close-btn" id="close-cart">&times;</button>
+    </div>
+    <div class="cart-items" id="cart-items-container">
+      <!-- Items -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Total:</span>
+        <span id="cart-total-price">EGP 0</span>
+      </div>
+      <button class="btn btn-primary w-full" id="btn-to-checkout">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>FRAME X</h3>
+        <p>Upgrade your space with posters, frames, and stickers made for your vibe. Designed in Egypt. 🇪🇬</p>
+      </div>
+      <div>
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping Inside Egypt</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Socials</h3>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Secure Payment</h3>
+        <div class="payment-badges">
+          <span class="badge">COD</span>
+          <span class="badge">VF Cash</span>
+          <span class="badge">Instapay</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+       &copy; 2026 Frame X. All vibes reserved.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
